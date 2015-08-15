@@ -8,11 +8,21 @@ output:
 
 ## Loading and preprocessing the data
 
-
+```{r}
+data.activity <- read.csv("activity.csv")
+```
 
 ## What is mean total number of steps taken per day?
-
-
+```{r}
+library(dplyr)
+require(lattice)
+daily.steps <- data.activity %>% group_by(date) %>%  summarise_each(funs(sum))
+nrow(daily.steps)
+head(daily.steps)
+histogram(~date,data=daily.steps,type="count",
+       xlab="Days",
+       main="Steps taken per day")
+```
 
 ## What is the average daily activity pattern?
 
